@@ -2,10 +2,90 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Página de Inicio</title>
+    <title>Sistema de Biblioteca</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #4CAF50;
+            text-align: center;
+        }
+        .menu {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .menu-item {
+            background-color: #4CAF50;
+            color: white;
+            padding: 30px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background-color 0.3s;
+        }
+        .menu-item:hover {
+            background-color: #45a049;
+        }
+        .menu-item h3 {
+            margin: 0 0 10px 0;
+        }
+        .menu-item p {
+            margin: 0;
+            font-size: 14px;
+        }
+        .libros { background-color: #4CAF50; }
+        .libros:hover { background-color: #45a049; }
+        .usuarios { background-color: #2196F3; }
+        .usuarios:hover { background-color: #0b7dda; }
+        .prestamos { background-color: #FF9800; }
+        .prestamos:hover { background-color: #e68900; }
+    </style>
 </head>
 <body>
-    <h1 th:text="${mensaje}">TEST DE MENSAJE</h1>
-
+    <div class="container">
+        <h1>Sistema de Gestión de Biblioteca</h1>
+        <p style="text-align: center; color: #666;">Bienvenido al sistema de información bibliotecario</p>
+        
+        <div class="menu">
+            <a href="/libros" class="menu-item libros">
+                <h3>📚 Libros</h3>
+                <p>Buscar y consultar libros disponibles</p>
+            </a>
+            
+            <a href="/usuarios" class="menu-item usuarios">
+                <h3>👥 Usuarios</h3>
+                <p>Gestionar usuarios registrados</p>
+            </a>
+            
+            <a href="/prestamos" class="menu-item prestamos">
+                <h3>📖 Préstamos</h3>
+                <p>Ver préstamos y devoluciones</p>
+            </a>
+        </div>
+        
+        <div style="margin-top: 30px; padding: 20px; background-color: #f9f9f9; border-radius: 8px;">
+            <h3>Funcionalidades:</h3>
+            <ul>
+                <li>Buscar libros por título o autor</li>
+                <li>Consultar disponibilidad de libros</li>
+                <li>Gestionar préstamos y devoluciones</li>
+                <li>Ver historial de préstamos por usuario</li>
+            </ul>
+        </div>
+    </div>
 </body>
 </html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Perfil de Usuario - Biblioteca</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .nav { margin-bottom: 20px; }
+        .nav a { margin-right: 15px; text-decoration: none; color: #4CAF50; font-weight: bold; }
+        .perfil { background-color: #f9f9f9; padding: 20px; border-radius: 8px; }
+        .perfil h2 { color: #2196F3; }
+        .info-row { margin: 10px 0; }
+        .label { font-weight: bold; display: inline-block; width: 200px; }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <a href="/">Inicio</a>
+        <a href="/libros">Libros</a>
+        <a href="/usuarios">Usuarios</a>
+        <a href="/prestamos">Préstamos</a>
+    </div>
+    
+    <h1>Perfil de Usuario</h1>
+    
+    <div class="perfil" th:if="${usuario}">
+        <h2 th:text="${usuario.nombre} + ' ' + ${usuario.apellido}"></h2>
+        
+        <div class="info-row">
+            <span class="label">ID:</span>
+            <span th:text="${usuario.id}"></span>
+        </div>
+        
+        <div class="info-row">
+            <span class="label">Email:</span>
+            <span th:text="${usuario.email}"></span>
+        </div>
+        
+        <div class="info-row">
+            <span class="label">Teléfono:</span>
+            <span th:text="${usuario.telefono}"></span>
+        </div>
+        
+        <div class="info-row">
+            <span class="label">RUT:</span>
+            <span th:text="${usuario.rut}"></span>
+        </div>
+        
+        <div class="info-row">
+            <span class="label">Fecha de Registro:</span>
+            <span th:text="${usuario.fechaRegistro}"></span>
+        </div>
+        
+        <br>
+        <a th:href="@{/prestamos/usuario/{id}(id=${usuario.id})}">Ver préstamos de este usuario →</a>
+    </div>
+    
+    <div th:unless="${usuario}">
+        <p>Usuario no encontrado.</p>
+    </div>
+    
+    <br>
+    <a href="/usuarios">← Volver a la lista</a>
+</body>
+</html>

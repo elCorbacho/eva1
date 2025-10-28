@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Disponibilidad - Biblioteca</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .nav { margin-bottom: 20px; }
+        .nav a { margin-right: 15px; text-decoration: none; color: #4CAF50; font-weight: bold; }
+        .disponibilidad { background-color: #f9f9f9; padding: 20px; border-radius: 8px; text-align: center; }
+        .disponibilidad h2 { color: #4CAF50; }
+        .status { font-size: 24px; margin: 20px 0; padding: 20px; border-radius: 8px; }
+        .disponible { background-color: #d4edda; color: #155724; border: 2px solid #28a745; }
+        .no-disponible { background-color: #f8d7da; color: #721c24; border: 2px solid #dc3545; }
+        .info { font-size: 18px; margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <a href="/">Inicio</a>
+        <a href="/libros">Libros</a>
+        <a href="/usuarios">Usuarios</a>
+        <a href="/prestamos">Préstamos</a>
+    </div>
+    
+    <h1>Consulta de Disponibilidad</h1>
+    
+    <div class="disponibilidad" th:if="${libro}">
+        <h2 th:text="${libro.titulo}"></h2>
+        <p class="info"><strong>Autor:</strong> <span th:text="${libro.autor}"></span></p>
+        
+        <div th:if="${libro.copiasDisponibles > 0}" class="status disponible">
+            <h3>✓ DISPONIBLE</h3>
+            <p>Copias disponibles: <strong th:text="${libro.copiasDisponibles}"></strong> de <span th:text="${libro.copiasTotales}"></span></p>
+        </div>
+        
+        <div th:if="${libro.copiasDisponibles == 0}" class="status no-disponible">
+            <h3>✗ NO DISPONIBLE</h3>
+            <p>Todas las copias están prestadas actualmente.</p>
+            <p>Total de copias: <span th:text="${libro.copiasTotales}"></span></p>
+        </div>
+    </div>
+    
+    <div th:unless="${libro}">
+        <p>Libro no encontrado.</p>
+    </div>
+    
+    <br>
+    <a href="/libros">← Volver a la lista</a>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Libros - Biblioteca</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+        th { background-color: #4CAF50; color: white; }
+        tr:hover { background-color: #f5f5f5; }
+        .nav { margin-bottom: 20px; }
+        .nav a { margin-right: 15px; text-decoration: none; color: #4CAF50; font-weight: bold; }
+        .disponible { color: green; font-weight: bold; }
+        .no-disponible { color: red; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <a href="/">Inicio</a>
+        <a href="/libros">Libros</a>
+        <a href="/usuarios">Usuarios</a>
+        <a href="/prestamos">Préstamos</a>
+    </div>
+    
+    <h1>Lista de Libros</h1>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Título</th>
+                <th>Autor</th>
+                <th>ISBN</th>
+                <th>Editorial</th>
+                <th>Categoría</th>
+                <th>Copias Totales</th>
+                <th>Copias Disponibles</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="libro : ${libros}">
+                <td th:text="${libro.id}"></td>
+                <td th:text="${libro.titulo}"></td>
+                <td th:text="${libro.autor}"></td>
+                <td th:text="${libro.isbn}"></td>
+                <td th:text="${libro.editorial}"></td>
+                <td th:text="${libro.categoria}"></td>
+                <td th:text="${libro.copiasTotales}"></td>
+                <td>
+                    <span th:if="${libro.copiasDisponibles > 0}" 
+                          th:text="${libro.copiasDisponibles}"
+                          class="disponible"></span>
+                    <span th:if="${libro.copiasDisponibles == 0}" 
+                          th:text="${libro.copiasDisponibles}"
+                          class="no-disponible"></span>
+                </td>
+                <td>
+                    <a th:href="@{/libros/{id}(id=${libro.id})}">Ver detalle</a> |
+                    <a th:href="@{/libros/disponibilidad/{id}(id=${libro.id})}">Disponibilidad</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

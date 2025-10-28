@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Préstamos - Biblioteca</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+        th { background-color: #FF9800; color: white; }
+        tr:hover { background-color: #f5f5f5; }
+        .nav { margin-bottom: 20px; }
+        .nav a { margin-right: 15px; text-decoration: none; color: #4CAF50; font-weight: bold; }
+        .estado-activo { color: orange; font-weight: bold; }
+        .estado-devuelto { color: green; font-weight: bold; }
+        .estado-atrasado { color: red; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <a href="/">Inicio</a>
+        <a href="/libros">Libros</a>
+        <a href="/usuarios">Usuarios</a>
+        <a href="/prestamos">Préstamos</a>
+    </div>
+    
+    <h1>Lista de Préstamos</h1>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Libro</th>
+                <th>Usuario</th>
+                <th>Fecha Préstamo</th>
+                <th>Devolución Esperada</th>
+                <th>Devolución Real</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="prestamo : ${prestamos}">
+                <td th:text="${prestamo.id}"></td>
+                <td th:text="${prestamo.libro.titulo}"></td>
+                <td th:text="${prestamo.usuario.nombre} + ' ' + ${prestamo.usuario.apellido}"></td>
+                <td th:text="${prestamo.fechaPrestamo}"></td>
+                <td th:text="${prestamo.fechaDevolucionEsperada}"></td>
+                <td th:text="${prestamo.fechaDevolucionReal != null ? prestamo.fechaDevolucionReal : '-'}"></td>
+                <td>
+                    <span th:if="${prestamo.estado.name() == 'ACTIVO'}" 
+                          th:text="${prestamo.estado}"
+                          class="estado-activo"></span>
+                    <span th:if="${prestamo.estado.name() == 'DEVUELTO'}" 
+                          th:text="${prestamo.estado}"
+                          class="estado-devuelto"></span>
+                    <span th:if="${prestamo.estado.name() == 'ATRASADO'}" 
+                          th:text="${prestamo.estado}"
+                          class="estado-atrasado"></span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

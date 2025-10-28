@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalle del Libro - Biblioteca</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .nav { margin-bottom: 20px; }
+        .nav a { margin-right: 15px; text-decoration: none; color: #4CAF50; font-weight: bold; }
+        .detalle { background-color: #f9f9f9; padding: 20px; border-radius: 8px; }
+        .detalle h2 { color: #4CAF50; }
+        .info-row { margin: 10px 0; }
+        .label { font-weight: bold; display: inline-block; width: 200px; }
+        .disponible { color: green; font-weight: bold; }
+        .no-disponible { color: red; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <a href="/">Inicio</a>
+        <a href="/libros">Libros</a>
+        <a href="/usuarios">Usuarios</a>
+        <a href="/prestamos">Préstamos</a>
+    </div>
+    
+    <h1>Detalle del Libro</h1>
+    
+    <div class="detalle" th:if="${libro}">
+        <h2 th:text="${libro.titulo}"></h2>
+        
+        <div class="info-row">
+            <span class="label">ID:</span>
+            <span th:text="${libro.id}"></span>
+        </div>
+        
+        <div class="info-row">
+            <span class="label">Autor:</span>
+            <span th:text="${libro.autor}"></span>
+        </div>
+        
+        <div class="info-row">
+            <span class="label">ISBN:</span>
+            <span th:text="${libro.isbn}"></span>
+        </div>
+        
+        <div class="info-row">
+            <span class="label">Editorial:</span>
+            <span th:text="${libro.editorial}"></span>
+        </div>
+        
+        <div class="info-row">
+            <span class="label">Fecha de Publicación:</span>
+            <span th:text="${libro.fechaPublicacion}"></span>
+        </div>
+        
+        <div class="info-row">
+            <span class="label">Categoría:</span>
+            <span th:text="${libro.categoria}"></span>
+        </div>
+        
+        <div class="info-row">
+            <span class="label">Copias Totales:</span>
+            <span th:text="${libro.copiasTotales}"></span>
+        </div>
+        
+        <div class="info-row">
+            <span class="label">Copias Disponibles:</span>
+            <span th:if="${libro.copiasDisponibles > 0}" 
+                  th:text="${libro.copiasDisponibles}"
+                  class="disponible"></span>
+            <span th:if="${libro.copiasDisponibles == 0}" 
+                  th:text="${libro.copiasDisponibles}"
+                  class="no-disponible"></span>
+        </div>
+    </div>
+    
+    <div th:unless="${libro}">
+        <p>Libro no encontrado.</p>
+    </div>
+    
+    <br>
+    <a href="/libros">← Volver a la lista</a>
+</body>
+</html>
